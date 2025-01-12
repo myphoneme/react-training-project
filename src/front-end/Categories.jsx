@@ -1,28 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import React, { useContext } from "react";
 import { ListGroup } from "react-bootstrap";
-import { VscNoNewline } from "react-icons/vsc";
-
-// style = {{backgroundColor:"black"}}
-
-// "bg-dark text-white"
+import { globalContext } from "./Context";
 
 function Categories({ categories, handelCategoryId, toggle, textColor }) {
+  const { mode, setMode } = useContext(globalContext);
   return (
     <div>
       <div className="mb-4">
-        <h6 className={textColor == "text-dark" ? "text-light" : "text-dark"}>
-          Categories
-        </h6>
+        <h6 className={mode ? "text-dark" : "text-light"}>Categories</h6>
 
         <ListGroup as="ul">
           {categories.map((category, index) => (
             <ListGroup.Item
               as="li"
-              className={
-                toggle == "light" ? "bg-white text-dark" : "bg-dark text-light"
-              }
+              className={mode ? "bg-dark text-light" : "bg-white text-dark"}
               key={category.id}
             >
               <button
@@ -35,11 +26,7 @@ function Categories({ categories, handelCategoryId, toggle, textColor }) {
                   padding: 0,
                   transition: "color 0.3s ease",
                 }}
-                className={
-                  textColor == "text-dark"
-                    ? " text-black fw-semibold"
-                    : " text-light "
-                }
+                className={mode ? " text-light " : " text-black fw-semibold"}
                 onMouseEnter={(e) => (e.target.style.color = "gray")}
                 onMouseLeave={(e) => (e.target.style.color = "white")}
               >

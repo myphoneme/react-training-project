@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ListGroup, Button } from "react-bootstrap";
+import { globalContext } from "./Context";
 
-function RecentPost({ posts, handelRecentPost , toggle, textColor  }) {
+function RecentPost({ posts, handelRecentPost }) {
+  const { mode, setMode } = useContext(globalContext);
   return (
     <div>
       <div className="mb-4">
-        <h6 className={textColor == "text-dark" ? "text-light" : "text-dark"}>Recent Posts</h6>
+        <h6 className={mode ? "text-dark" : "text-light"}>Recent Posts</h6>
         <ListGroup as="ul">
           {posts.map((post, index) => (
             <ListGroup.Item
               as="li"
-              className={
-                toggle == "light" ? "bg-white text-dark" : "bg-dark text-light"
-              }
+              className={mode ? "bg-dark text-light" : "bg-white text-dark"}
               key={post.id}
             >
               <Button
@@ -26,11 +26,7 @@ function RecentPost({ posts, handelRecentPost , toggle, textColor  }) {
                   padding: 0,
                   transition: "color 0.3s ease",
                 }}
-                className={
-                  textColor == "text-dark"
-                    ? " text-black fw-semibold"
-                    : " text-light "
-                }
+                className={mode ?  " text-light " :" text-black fw-semibold"}
               >
                 {post.title}
               </Button>

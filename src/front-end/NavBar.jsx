@@ -1,41 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 import { CiCloudMoon } from "react-icons/ci";
 import { LuSunMedium } from "react-icons/lu";
+import { globalContext } from "./Context";
 
-const NavigationBar = ({ setTextColor, setToggle, toggle, textColor }) => {
+const NavigationBar = () => {
   const location = useLocation();
+  const { mode, setMode } = useContext(globalContext);
+
   const handelToggleTheme = () => {
-    setToggle(toggle == "dark" ? "light" : "dark");
-    setTextColor(toggle == "dark" ? "text-dark" : "text-white");
-    document.body.style.backgroundColor =
-      toggle === "dark" ? "#333" : "#f8f9fa";
+    setMode(!mode);
+    document.body.style.backgroundColor = mode ? "#212529" : "#f8f9fa";
   };
 
   return (
-    <Navbar bg={toggle} variant={toggle}>
+    <Navbar bg={mode ? "dark" : "light"} variant={mode ? "dark" : "light"}>
       <Container>
-        <Navbar.Brand href="/">My Blog</Navbar.Brand>
+        <Navbar.Brand as={NavLink} to="/">
+          My Blog
+        </Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link
-            className={textColor}
-            href="/about"
+            as={NavLink}
+            to="/about"
+            className={mode ? "text-white" : "text-dark"}
             active={location.pathname === "/about"}
           >
             About
           </Nav.Link>
           <Nav.Link
-            href="/contact"
+            as={NavLink}
+            to="/contact"
+            className={mode ? "text-white" : "text-dark"}
             active={location.pathname === "/contact"}
-            className={textColor}
           >
             Contact
           </Nav.Link>
         </Nav>
       </Container>
-      <Nav.Link onClick={handelToggleTheme} className={textColor}>
-        {toggle == "dark" ? (
+      <Nav.Link
+        onClick={handelToggleTheme}
+        className={mode ? "text-white" : "text-dark"}
+      >
+        {mode ? (
           <LuSunMedium style={{ fontSize: "30px", marginRight: "15px" }} />
         ) : (
           <CiCloudMoon style={{ fontSize: "30px", marginRight: "15px" }} />

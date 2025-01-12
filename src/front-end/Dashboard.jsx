@@ -11,15 +11,13 @@ import {
   get_posts_by_category_id,
   getPostById,
 } from "../admin/services/adminApi";
-import { globalContex } from "./Context";
+import { globalContext } from "./Context";
 
 const Dashboard = () => {
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
   const [recentPosts, setRecenetPosts] = useState([]);
-  // const [toggle, setToggle] = useState("dark");
-  const [textColor, setTextColor] = useState("text-light");
-  const { toggle, setToggle } = useContext(globalContex);
+  const { mode, setMode } = useContext(globalContext);
 
   useEffect(() => {
     fetchCategories();
@@ -49,7 +47,6 @@ const Dashboard = () => {
   const fetchCategories = async () => {
     try {
       const response = await getCategories();
-      // console.log(response);
       setCategories(response);
     } catch (e) {
       console.log("Something Went Wrong " + e);
@@ -65,7 +62,6 @@ const Dashboard = () => {
       const data = await getPosts();
       setPosts(data);
       setRecenetPosts(data.slice(-5));
-      // console.log(posts);
     } catch (e) {
       console.log("Something Went Wrong " + e);
     }
@@ -73,20 +69,14 @@ const Dashboard = () => {
 
   return (
     <div>
-      <NavBar
-        setTextColor={setTextColor}
-        setToggle={setToggle}
-        toggle={toggle}
-        textColor={textColor}
-      />
+      {/* {alert(mode)} */}
+      <NavBar />
       <Container fluid className="mt-2">
         <Row>
           <Col md={10}>
             <Card
               className={
-                toggle == "light"
-                  ? "mb-4 bg-white text-dark"
-                  : "mb-4 bg-dark text-light"
+                mode ? "mb-4 bg-dark text-light" : "mb-4 bg-white text-dark"
               }
             >
               <BlogList posts={posts} />
@@ -96,14 +86,10 @@ const Dashboard = () => {
             <Categories
               categories={categories}
               handelCategoryId={handelCategory}
-              toggle={toggle}
-              textColor={textColor}
             />
             <RecentPost
               posts={recentPosts}
               handelRecentPost={handelRecentPostEevent}
-              toggle={toggle}
-              textColor={textColor}
             />
           </Col>
         </Row>

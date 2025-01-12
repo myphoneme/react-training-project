@@ -2,15 +2,23 @@ import React, { useContext } from "react";
 import NavBar from "./NavBar";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FaMapMarkerAlt, FaEnvelope, FaGlobe, FaClock } from "react-icons/fa";
+import { globalContext } from "./Context";
 
-const ContactUs = ({ toggle, setToggle }) => {
-  // const { toggle, setToggle } = useContext(globalContext);
+const ContactUs = () => {
+  const { mode, setMode } = useContext(globalContext);
   return (
     <>
       <NavBar />
-      {/* bg={toggle} style={{ color: toggle === "dark" ? "white" : "black" }} */}
-      <div className="p-2">
-        <Card className="p-1 shadow-sm">
+      <div
+        className={`p-2 mb-5 p-5 ${
+          mode ? "text-light bg-dark" : "text-dark bg-light"
+        }`}
+      >
+        <Card
+          className={`p-1 shadow-sm ${
+            mode ? "text-light bg-dark border-white" : "text-dark bg-light"
+          }`}
+        >
           <Row>
             <Col md={6} className="border-end">
               <Card.Body>
@@ -20,11 +28,11 @@ const ContactUs = ({ toggle, setToggle }) => {
                 <Row>
                   <Col
                     md={6}
-                    className="mb-3 p-5"
-                    style={{
-                      backgroundColor: "#f1f1f1aa",
-                      border: "4px solid white",
-                    }}
+                    className={`mb-3 p-5 ${
+                      mode
+                        ? "text-light bg-dark border-white"
+                        : "text-dark bg-light"
+                    }`}
                   >
                     <div className="d-flex align-items-start">
                       <FaMapMarkerAlt className="me-2 text-primary" size={24} />
@@ -36,11 +44,11 @@ const ContactUs = ({ toggle, setToggle }) => {
                   </Col>
                   <Col
                     md={6}
-                    className="mb-3 p-5 "
-                    style={{
-                      backgroundColor: "#f1f1f1aa",
-                      border: "4px solid white",
-                    }}
+                    className={`mb-3 p-5 ${
+                      mode
+                        ? "text-light bg-dark border-white"
+                        : "text-dark bg-light"
+                    }`}
                   >
                     <div className="d-flex align-items-start">
                       <FaEnvelope className="me-2 text-danger" size={24} />
@@ -56,11 +64,11 @@ const ContactUs = ({ toggle, setToggle }) => {
                 <Row>
                   <Col
                     md={6}
-                    className="mb-3 p-5"
-                    style={{
-                      backgroundColor: "#f1f1f1aa",
-                      border: "4px solid white",
-                    }}
+                    className={`mb-3 p-5 ${
+                      mode
+                        ? "text-light bg-dark border-white"
+                        : "text-dark bg-light"
+                    }`}
                   >
                     <div className="d-flex align-items-start">
                       <FaGlobe className="me-2 text-success" size={24} />
@@ -80,11 +88,11 @@ const ContactUs = ({ toggle, setToggle }) => {
                   </Col>
                   <Col
                     md={6}
-                    className="mb-3 p-5"
-                    style={{
-                      backgroundColor: "#f1f1f1aa",
-                      border: "4px solid white",
-                    }}
+                    className={`mb-3 p-5 ${
+                      mode
+                        ? "text-light bg-dark border-white"
+                        : "text-dark bg-light"
+                    }`}
                   >
                     <div className="d-flex align-items-start">
                       <FaClock className="me-2 text-warning" size={24} />
@@ -99,7 +107,7 @@ const ContactUs = ({ toggle, setToggle }) => {
             </Col>
 
             <Col md={6}>
-              <Card.Body>
+              <Card.Body bg="dark">
                 <Card.Title className="text-center mb-4">
                   <h4>Our Location</h4>
                 </Card.Title>

@@ -37,10 +37,7 @@ function BlogList({ posts }) {
               <Card.Body>
                 <Card.Title>
                   {post.title}
-                  <small
-                    // className="text-muted"
-                    style={{ marginLeft: "10px", fontSize: "11px" }}
-                  >
+                  <small style={{ marginLeft: "10px", fontSize: "11px" }}>
                     <MdAccessTime style={{ marginRight: "5px" }} />
                     {post.created_at}
                     <FaUserPen

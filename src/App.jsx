@@ -5,20 +5,19 @@ import Login from "./admin/pages/Login";
 import Registration from "./admin/pages/Registration";
 import UserList from "./admin/components/users/UserList";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ToastProvider } from "./admin/components/ToastContext"; // Correct import for ToastProvider
+import { ToastProvider } from "./admin/components/ToastContext";
 import PageNotFound from "./admin/components/PageNotFound";
 import CategoryList from "./admin/components/Categories/CategoryList";
 import PostList from "./admin/components/posts/PostList";
 import Dashboard from "./front-end/Dashboard";
 import ContactUs from "./front-end/ContactUs";
 import About from "./front-end/About";
-import AboutMe from "./front-end/AboutMe";
-import { globalContex } from "./front-end/Context";
+import { globalContext } from "./front-end/Context";
 import { useState } from "react";
 function App() {
-  const [toggle, setToggle] = useState("dark");
+  const [mode, setMode] = useState(false);
   return (
-    <globalContex.Provider value={{ toggle, setToggle }}>
+    <globalContext.Provider value={{ mode, setMode }}>
       <ToastProvider>
         <Router>
           <Routes>
@@ -29,17 +28,14 @@ function App() {
             <Route path="/userlist" element={<UserList />} />
             <Route path="/categorylist" element={<CategoryList />} />
             <Route path="/" element={<Dashboard />} />
-            <Route
-              path="/contact"
-              element={<ContactUs toggle={toggle} setToggle={setToggle} />}
-            />
+            <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<About />} />
-            <Route path="/aboutme" element={<AboutMe />} />
+
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
       </ToastProvider>
-    </globalContex.Provider>
+    </globalContext.Provider>
   );
 }
 
