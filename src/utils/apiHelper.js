@@ -6,7 +6,7 @@ const apiRequest = async (method, url, data = null, headers = {}) => {
     ...headers,
   };
 
-  if (token) {
+  if (token) { //comment tested
     defaultHeaders["Authorization"] = `Bearer ${token}`;
   }
 
