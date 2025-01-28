@@ -17,9 +17,9 @@ function About() {
       >
         <Row className="justify-content-center">
           <Col md={10} className="text-center">
-            <h3 className="mb-3">Who We Are --?</h3>
+            <h3 className="mb-3">Who We Are ?</h3>
             <p>
-              Hello there , Founded by IITians, with the objective of making
+              Founded by IITians, with the objective of making
               technologies friendly to human beings. The company’s main
               objective is to reach masses and especially in the developing
               nations where internet and literacy are the major challenges.
