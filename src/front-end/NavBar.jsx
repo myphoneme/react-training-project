@@ -18,7 +18,7 @@ const NavigationBar = () => {
     <Navbar bg={mode ? "dark" : "light"} variant={mode ? "dark" : "light"}>
       <Container>
         <Navbar.Brand as={NavLink} to="/">
-          My Blog
+          My Blog new
         </Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link
