@@ -10,12 +10,15 @@ export default function Login() {
     password: "",
   });
 
+  const [error, setError] = useState("");
   const handleInputChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); //ronik 
+
     try {
       const response = await fetch(`${API_URL}login`, {
         method: "POST",
@@ -41,10 +44,12 @@ export default function Login() {
             window.location.href = "/dashboard";
           } else {
             console.error("Token not found in response");
+            setError("Incorrect credentials, please try again.");
           }
         })
         .catch((error) => {
           console.error("Error during fetch:", error);
+          setError("Incorrect credentials, please try again.");
         });
     } catch (e) {
       console.log("Something Went Wrong " + e);
@@ -97,6 +102,11 @@ export default function Login() {
                     Login
                   </Button>
                 </Form.Group>
+                {error && ( 
+                  <div className="mt-3 text-center text-danger">
+                    {error}
+                  </div>
+                )}
               </Card>
             </Col>
           </Row>
